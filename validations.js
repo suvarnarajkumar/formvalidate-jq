@@ -1,0 +1,893 @@
+/* ONLOADING */
+$
+$(document).ready(function(){
+	$(".r_w").hide();
+	$('input[name=userid]').focus();
+	});
+	
+/* BACKGROUND COLOR EFFECT */
+(function($) {
+ $.fn.MessageBox = function(x) {
+  $("body").css("background-color",x);
+ };
+})(jQuery);
+
+
+/* PROGRESS_BAR VARIABLES FOR EACH FIELD VALIDATION */
+progress_bar13=0;
+progress_bar0=0;
+progress_bar1=0;
+progress_bar2=0;
+progress_bar3=0;
+progress_bar4=0;
+progress_bar5=0;
+progress_bar6=0;
+progress_bar7=0;
+progress_bar8=0;
+progress_bar9=0;
+progress_bar10=0;
+progress_bar11=0;
+progress_bar12=0;
+
+
+/* GLOBAL VARIABLES TO STORE VALUE OF FORM INPUTS */
+COUNTRIES_LIST="NULL";
+
+/* CHECKING FOR USERNAME VALID OR NOT */
+(function($) {
+ $.fn.userid_validation = function() {
+  
+	var uid = $('input[name=userid]').val();
+	var passid = $('input[name=passid]').val();
+	var letters = /^[a-zA-Z][a-zA-Z\d]{4,7}$/;
+if(!uid.match(letters))
+{
+	if(progress_bar0 === 1)
+	{
+		progress_bar0=0;
+		var val=$('#state').val();
+		val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=userid]').siblings("p").text("UserName should be "+5+" to "+8+" alphanumeric" );
+$("#u_name").css("color","red");
+$("img#right1").hide();
+$("img#wrong1").show();
+$('input[name=userid]').focus();
+return;
+}
+else
+{
+	$('input[name=userid]').siblings("p").empty();
+	if(progress_bar0 === 0)
+	{
+	progress_bar0=1;
+	var val=$('#state').val();
+   val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}
+$('#u_name').css("color","blue");
+	$('#wrong1').hide();
+$('#right1').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+$('input[name=passid]').focus();
+return ;
+}
+
+ };
+})(jQuery);
+
+
+
+/* CHECKING FOR PASSWORD VALID OR NOT */
+(function($) {
+ $.fn.passid_validation = function() {
+
+
+	var passid = $('input[name=passid]').val();
+var con_passid = $('input[name=confirm_passid]').val();
+var letters = /^(?=.*\d.*)(?=.*[a-z].*)(?=.*[@#].*)(?=.*[A-Z].*)[a-zA-Z0-9@#]{4,6}$/;
+if(!passid.match(letters))
+{
+	if(progress_bar1 === 1)
+	{
+		progress_bar1=0;
+		var val=$('#state').val();
+   val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=passid]').siblings("p").text("Password should be "+4+" to "+6+" atleast one lowercase, uppercase, number, special character(@,#)");
+$('#pwd').css("color","red");
+$('#right2').hide();
+$('#wrong2').show();
+$('#disab').prop('disabled', true);
+if($('input[name=confirm_passid]').val().length !==0 )
+{
+$('input[name=confirm_passid]').siblings("p").text("Confirm Password should not be different from above password");
+if(progress_bar2 === 1)
+		{
+		progress_bar2=0;
+		var val=$('#state').val();
+   	val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}	
+ $('#con_pwd').css("color","red");
+		$('#right3').hide();
+			$('#wrong3').show();
+}
+$('input[name=passid]').focus();
+return;
+}
+else
+{
+	$('input[name=confirm_passid]').siblings("p").text("Confirm Password should not be different from above password");
+	if(progress_bar2 === 1)
+		{
+		progress_bar2=0;
+		var val=$('#state').val();
+   	val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}		
+	$('#con_pwd').css("color","red");
+		$('#right3').hide();
+			$('#wrong3').show();
+	$('input[name=passid]').siblings("p").empty();
+	if(progress_bar1 === 0)
+	{
+	progress_bar1=1;
+	var val=$('#state').val();
+   val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}
+	if(!con_passid.localeCompare(passid) )
+	{
+		if(progress_bar2 === 0)
+		{
+		progress_bar2=1;
+		var val=$('#state').val();
+   	val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}	
+		 $('#con_pwd').css("color","blue");
+		$('#right3').show();
+			$('#wrong3').hide();
+			$('input[name=confirm_passid]').siblings("p").empty();
+ $('#pwd').css("color","blue");
+	$('#right2').show();
+			$('#wrong2').hide();
+if($('#state').val() === 100)
+	{$('#status').show();}
+	$('#disab').prop('disabled', false);
+		$('input[name=fisrt_name]').focus();
+		return
+	}
+	else
+	{
+	
+	$('#disab').prop('disabled', false);
+    $('#pwd').css("color","blue");
+		$('#right2').show();
+			$('#wrong2').hide();
+
+if($('#state').val() === 100)
+	{$('#status').show();}
+$('input[name=confirm_passid]').focus();
+return ;
+}
+}
+
+ };
+})(jQuery);
+
+
+
+
+/* CHECKING FOR CONFIRM PASSWORD VALID OR NOT */
+(function($) {
+ $.fn.con_passid_validation = function() {
+
+	var passid = $('input[name=passid]').val();
+	var con_passid = $('input[name=confirm_passid]').val();
+var fname = $('input[name=first_name]').val();
+if(con_passid.localeCompare(passid) || con_passid===0 )
+{
+	if(progress_bar2 === 1)
+	{
+		progress_bar2=0;
+		var val=$('#state').val();
+		val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=confirm_passid]').siblings("p").text("Confirm Password should not be different from above password");
+$('#con_pwd').css("color","red");
+$('#right3').hide();
+$('#wrong3').show();
+$('input[name=confirm_passid]').focus();
+return;
+}
+else
+{
+	$('input[name=confirm_passid]').siblings("p").empty();
+	if(progress_bar2 === 0)
+	{
+		progress_bar2=1;
+		var val=$('#state').val();
+		val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('#con_pwd').css("color","blue");
+$('#wrong3').hide();
+$('#right3').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+$('input[name=first_name]').focus();
+return ;
+}
+
+};
+})(jQuery);
+
+
+/* CHECKING FOR FIRST NAME VALID OR NOT */
+(function($) {
+ $.fn.fname_validation = function() {
+
+	var first_name=$('input[name=first_name]').val();
+	var last_name= $('input[name=last_name]').val();
+	var letters = /^[a-zA-Z]{2,6}$/;
+if(!first_name.match(letters))
+{
+	if(progress_bar3 === 1)
+	{
+		progress_bar3=0;
+		var val=$('#state').val();
+		val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=first_name]').siblings("p").text("First name should be "+2+" to "+6+" characters without spaces.");
+$('#first_n').css("color","red");
+$('#right4').hide();
+$('#wrong4').show();
+$('input[name=fisrt_name]').focus();
+return ;
+}
+else
+{
+$('input[name=first_name]').siblings("p").empty();
+	if(progress_bar3 === 0)
+	{
+		progress_bar3=1;
+		var val=$('#state').val();
+		val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('#first_n').css("color","blue");
+		$('#wrong4').hide();
+$('#right4').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+$('input[name=last_name]').focus();
+return ;
+}
+
+};
+})(jQuery);
+
+
+/* CHECKING FOR LAST NAME VALID OR NOT */
+(function($) {
+ $.fn.lname_validation = function() {
+	var file_name= $('input[name=file_name]').val();
+	var last_name= $('input[name=last_name]').val();
+	var letters = /^\S[a-zA-Z\. ]{0,15}\S$/;
+if(!last_name.match(letters))
+{
+	if(progress_bar4 === 1)
+	{
+		progress_bar4=0;
+		var val=$('#state').val();
+		val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=last_name]').siblings("p").text("Last name should be "+2+" to "+15+" characters and no spaces should be there at start or end and you can use dot'.'");
+$('#last_n').css("color","red");
+$('#right5').hide();
+$('#wrong5').show();
+$('input[name=last_name]').focus();
+return ;
+}
+else
+{
+	$('input[name=last_name]').siblings("p").empty();
+	if(progress_bar4 === 0)
+	{
+		progress_bar4=1;
+		var val=$('#state').val();
+		val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('#last_n').css("color","blue");
+$('#wrong5').hide();
+$('#right5').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+$('input[name=file_name]').focus();
+return;
+}
+
+};
+})(jQuery);
+
+
+/* CHECK THE FILE UPLOADED IS VALID FORMAT */
+(function($) {
+ $.fn.file_validation = function() {
+var f_name =$('input[name=file_name]').val();
+var fileName = f_name.split(".");
+       fileName = fileName[fileName.length-1 ];
+if(fileName ==='jpg' || fileName ==='gif' || fileName === 'png' )
+{
+	if(progress_bar5 === 0)
+	{
+		progress_bar5=1;
+		var val=$('#state').val();
+		val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+	$('input[name=file_name]').siblings("p").empty();
+	 $('#file_n').css("color","blue");
+	 		$('#wrong6').hide();
+$('#right6').show();
+	 if($('#state').val() === 100)
+	{$('#status').show();}
+$('input[name=sex]')[0].focus();
+return;
+}
+else
+{
+	if(progress_bar5 === 1)
+	{
+		progress_bar5=0;
+		var val=$('#state').val();
+		val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=file_name]').siblings("p").text("File should be .jpg/.png/.gif format image");
+$('#file_n').css("color","red");
+$('#right6').hide();
+$('#wrong6').show();
+$('input[name=file_name]').focus();
+return;
+}
+
+};
+})(jQuery);
+
+
+/* CHECKING FOR GENDER VERIFICATION */
+(function($) {
+ $.fn.gender_validation = function() {
+if(progress_bar13 === 0)
+	{
+		progress_bar13=1;
+		var val=$('#state').val();
+		val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+	progress_bar13=1;
+	$('#gender').css("color","blue");
+$('#right7').show();
+$('#wrong7').hide();
+if($('#state').val() === 100)
+	{$('#status').show();}
+return;
+};
+})(jQuery);
+
+
+
+/* CHECKING FOR DAY SELECTED OR NOT */
+(function($) {
+ $.fn.dob1select = function() {
+	var dob1= $('select[name=dob1]').val();
+	var dob2= $('select[name=dob2]').val();
+	var dob3= $('select[name=dob3]').val();
+if(dob1 == "default")
+{
+	if(progress_bar6 === 1)
+	{
+		progress_bar6=0;
+	var val=$('#state').val();
+		val=val-3; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('select[name=dob1]').siblings("p").text('Select "day" from the list');
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob1]').focus();
+return;
+}
+else
+{
+	$('select[name=dob1]').siblings("p").empty();
+	if(progress_bar6 === 0)
+	{
+		progress_bar6=1;
+		var val=$('#state').val();
+		val=val+3; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+	
+	
+if(dob2 == "default")
+{
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob2]').focus();
+return  ;
+}
+else
+{
+	
+if(dob3 == "default")
+{
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob3]').focus();
+return ;
+}
+else
+{
+$('#db').css("color","blue");
+$('#wrong8').hide();
+$('#right8').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+	$('input[type="checkbox"]:first').focus();
+return;
+}
+}
+}
+};
+})(jQuery);
+
+
+/* CHECKING FOR MONTH SELECTED OR NOT */
+(function($) {
+ $.fn.dob2select = function() {
+	var dob1= $('select[name=dob1]').val();
+	var dob2= $('select[name=dob2]').val();
+	var dob3= $('select[name=dob3]').val();
+
+if(dob2 == "default")
+{
+	if(progress_bar7 === 1)
+	{
+		progress_bar7=0;
+		var val=$('#state').val();
+		val=val-3; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+
+$('select[name=dob2]').siblings("p").text('Select "month" from the list');
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob2]').focus();
+return  ;
+}
+else
+{
+	$('select[name=dob2]').siblings("p").empty();
+	if(progress_bar7 === 0)
+	{
+		progress_bar7=1;
+		var val=$('#state').val();
+		val=val+3; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+
+if(dob1 == "default")
+{
+$('select[name=dob1]').siblings("p").text('Select "day" from the list');
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+var dob1= $('select[name=dob1]').focus();
+return ;
+}
+else
+{
+
+if(dob3 == "default")
+{
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+var dob1= $('select[name=dob3]').focus();
+return ;
+}
+else
+{
+$('#db').css("color","blue");
+$('#wrong8').hide();
+$('#right8').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+	$('input[type="checkbox"]:first').focus();
+return  ;
+}
+}
+}
+};
+})(jQuery);
+
+
+
+/* CHECKING FOR YEAR SELECTED OR NOT */
+(function($) {
+ $.fn.dob3select = function() {
+	var dob1= $('select[name=dob1]').val();
+	var dob2= $('select[name=dob2]').val();
+	var dob3= $('select[name=dob3]').val();
+
+if(dob3 == "default")
+{
+	if(progress_bar8 === 1)
+	{
+		progress_bar8=0;
+		var val=$('#state').val();
+		val=val-4; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+
+	
+
+$('select[name=dob3]').siblings("p").text('Select "year" from the list');
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob3]').focus();
+return ;
+}
+else
+{
+	$('select[name=dob3]').siblings("p").empty();
+	if(progress_bar8 === 0)
+	{
+		progress_bar8=1;
+		var val=$('#state').val();
+		val=val+4; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+	if(dob1 == "default")
+{
+$('select[name=dob1]').siblings("p").text('Select "day" from the list');
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob1]').focus();
+return ;
+}
+else
+{
+if(dob2 == "default")
+{
+$('select[name=dob2]').siblings("p").text('Select "month" from the list');
+$('#db').css("color","red");
+$('#right8').hide();
+$('#wrong8').show();
+$('select[name=dob2]').focus();
+return ;
+}
+else
+{
+$('#db').css("color","blue");
+$('#wrong8').hide();
+$('#right8').show();
+if($('#state').val() === 100)
+	{$('#status').show();}
+	$('input[type="checkbox"]:first').focus();
+return ;
+}
+}
+}
+
+};
+})(jQuery);
+
+/* CHECK PHONE NUMBER ENTERED OR NOT AND VALIDATE ENTERED PHONE NUMBER */
+(function($) {
+ $.fn.phone_validations = function() {
+	var phno = $('input[name=phno]').val();
+	var letters = /^\+\d\d \(\d\d\d\)-\d\d\d-\d\d\d\d$/;
+if(!phno.match(letters))
+{
+	if(progress_bar9 === 1)
+	{
+		progress_bar9=0;
+		var val=$('#state').val();
+		val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+	}	
+$('input[name=phno]').siblings("p").text("Phone number should be in this format '+99 (999)-999-9999'" );
+$('#phone').css("color","red");
+$('#right11').hide();
+$('#wrong11').show();
+$('input[name=phno]').focus();
+return;
+}
+else
+{
+	$('input[name=phno]').siblings("p").empty();
+if(progress_bar9 === 0)
+	{
+		progress_bar9=1;
+		var val=$('#state').val();
+		val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}
+		$('#phone').css("color","blue");
+			$('#wrong11').hide();
+$('#right11').show();
+	if($('#state').val() === 100)
+	{$('#status').show();}
+return;
+}
+
+};
+})(jQuery);
+
+
+
+/* CHECK HOBBIES SELECTED OR NOT */
+
+(function($) {
+ $.fn.hobbies_validation = function() {
+var list=0;
+$("input[name=hob]").each(function(){
+    if ($(this).prop('checked')==true){ 
+        list++;	
+    }
+});
+if(list === 0)
+{
+	if(progress_bar10 === 1)
+	{
+		progress_bar10=0;
+		var val=$('#state').val();
+			val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}
+	$("#hobb").siblings("p").text("Select your hobbies or atleast 'others'");
+	$('#hobby').css("color","red");
+	$('#right9').hide();
+	$('#wrong9').show();
+	return;
+}
+	else
+	{
+		$("#hobb").siblings("p").empty();
+		if(progress_bar10 === 0)
+	{
+		progress_bar10=1;
+		var val=$('#state').val();
+			val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}
+		$('#hobby').css("color","blue");
+				$('#wrong9').hide();
+$('#right9').show();
+		if($('#state').val() === 100)
+	{$('#status').show();}
+	return;		
+		}
+
+};
+})(jQuery);
+
+
+/* CHECK COUNTRY SELECTED OR NOT */
+
+(function($) {
+ $.fn.country_validation = function() {
+	
+   var count = 0;
+	var k=0;
+	$( "#sel option:selected" ).each(function() {
+     		 if(k===0)
+    		 {
+    		 COUNTRIES_LIST=$( this ).text();k=1;
+				}
+				 else
+				 {
+				 	 COUNTRIES_LIST= COUNTRIES_LIST.concat(", "+$( this ).text());
+				 }         
+          count++;
+});	
+	
+    if(count === 1 && $( "#sel option:selected" ).text()==='(Select atleast country your stay-in)')
+{
+	if(progress_bar11 === 1)
+	{
+		progress_bar11=0;
+		var val=$('#state').val();
+			val=val-9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}
+		
+	$( "#sel").siblings("p").text("Select atleast your current stay-in country");
+	$('#cnty').css("color","red");
+	$('#right10').hide();
+	$('#wrong10').show();
+	return;
+}
+	else
+	{
+		$( "#sel").siblings("p").empty();
+		if(progress_bar11 === 0)
+	{
+		progress_bar11=1;
+		var val=$('#state').val();
+			val=val+9; $('#percentage').html(val+"%");
+		$('#state').val(val);
+		}
+		$('#cnty').css("color","blue");
+		$('#wrong10').hide();
+		$('#right10').show();
+	if($('#state').val() === 100)
+	{$('#status').show();}
+	return;		
+		}
+};
+})(jQuery);
+
+/* ON SUBMIT CHECK ALL FIELDS ARE FILLED OR NOT*/
+(function($) {
+ $.fn.pageRedirect = function() {
+$().gender_validation();
+	if($('#state').val() === 100)
+	{
+	var USER_NAME=$('input[name=userid]').val(); 
+	var PASSWORD=$('input[name=passid]').val(); 
+	var FIRST_NAME=$('input[name=first_name]').val(); 
+	var LAST_NAME=$('input[name=last_name]').val(); 
+	var FILE_NAME=$('input[name=file_name]').val();
+   var GENDER=$("input[name=sex]:checked").val();
+  	var D_O_B=$('select[name=dob1]').val()+"-"+$('select[name=dob2]').val()+"-"+$('select[name=dob3]').val(); 
+   var HOBBIES_LIST="null";	
+	var list=0; 
+	$("input[name=hob]").each(function(){
+    if ($(this).prop('checked')==true){  
+        if(list===0)
+		{
+		HOBBIES_LIST=	$(this).val(); 
+		list=1;
+		}	
+		else
+		{
+			HOBBIES_LIST=HOBBIES_LIST.concat(", "+$(this).val()); 
+		}
+    }
+});
+	var PHONE_NUMBER=$('input[name=phno]').val(); 
+			
+$('#status2').show();
+alert("Form Successfully Submitted with following information click 'ok'");
+alert("Account Information \n\n USERNAME\t:"+USER_NAME+"\n PASSWORD\t:"+ PASSWORD);
+alert("Profile Information \n\n FIRST NAME\t:"+FIRST_NAME+"\n LAST NAME\t:"+LAST_NAME+"\n FILE NAME\t:"+FILE_NAME+"\n GENDER\t\t:"+GENDER+"\n DATE OF BIRTH\t:"+D_O_B+"\n HOBBIES\t\t:"+HOBBIES_LIST+"\n HAVE BEEN TO\t:"+COUNTRIES_LIST);
+alert("Contact Information \n\n PHONE NUMBER\t:"+PHONE_NUMBER);
+var answer = confirm ("Press 'OK', if everything is right?")
+if (answer)
+return true;
+else
+return false;
+}
+else
+{
+if(progress_bar0 === 0)
+{
+$('input[name=userid]').siblings("p").text('Please enter username');
+$('input[name=userid]').focus();
+}
+else
+{
+if(progress_bar1 ===0)
+{
+$('input[name=passid]').siblings("p").text('Please enter password');
+$('input[name=passid]').focus();
+}
+else
+{
+if(progress_bar2 ===0)
+{
+$('input[name=confirm_passid]').siblings("p").text('Please enter confirm password');
+$('input[name=confirm_passid]').focus();
+}
+else
+{
+if(progress_bar3 ===0)
+{
+$('input[name=first_name]').siblings("p").text('Please enter first name');
+$('input[name=first_name]').focus();
+}
+else
+{
+if(progress_bar4 ===0)
+{
+$('input[name=last_name]').siblings("p").text('Please enter last name');
+$('input[name=last_name]').focus();
+}
+else
+{
+if(progress_bar5 ===0)
+{
+$('input[name=file_name]').siblings("p").text('Please upload file');
+$('input[name=file_name]').focus();
+}
+else
+{
+
+if(progress_bar6 ===0)
+{
+$('#dat1').siblings("p").text('Please select day in date of birth');
+$('#dat1').focus();
+}
+else
+{
+if(progress_bar7 ===0)
+{
+$('#dat2').siblings("p").text('Please select month in date of birth');
+$('#dat2').focus();
+}
+else
+{
+if(progress_bar8 ===0)
+{
+$('#dat3').siblings("p").text('Please select year in date of birth');
+$('#dat3').focus();
+}
+else
+{
+if(progress_bar10 ===0)
+{
+$('#hobb').siblings("p").text('Please select hobbies');
+$('input[type="checkbox"]:first').focus();
+}
+else
+{
+if(progress_bar11 ===0)
+{
+$('#sel').siblings("p").text('Please select country');
+$('#sel').focus();
+}
+else
+{
+if(progress_bar9 ===0)
+{
+$('input[name=phno]').siblings("p").text('Please enter phone number');
+$('input[name=phno]').focus();
+}
+}	
+}	
+}	
+}	
+}	
+}	
+}	
+}	
+}	
+}	
+}	
+
+return false;
+}
+};
+})(jQuery);
+
+
+
